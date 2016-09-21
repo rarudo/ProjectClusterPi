@@ -63,6 +63,7 @@ vector<string> ipInfo::getRoute(){
      * 最後の配列が相手のipアドレス
      */
     vector<string> route;
+    route.push_back("10,10,123,1");
     route.push_back("192,2,14,2");
     route.push_back("220,12,14,234");
     route.push_back("168,22,194,232");
