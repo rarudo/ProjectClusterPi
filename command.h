@@ -4,10 +4,16 @@
 
 #ifndef PROJECTPI_COMMAND_H
 #define PROJECTPI_COMMAND_H
+#include<string>
+#include <iostream>
 
+using namespace std;
 
 class command {
-
+public:
+    void doCommand(string str);
+    string getResult();
+private:
 };
 
 

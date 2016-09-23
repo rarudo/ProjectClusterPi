@@ -6,6 +6,10 @@
 #define PROJECTPI_IPINFO_H
 #include<string>
 #include <vector>
+#include <fstream>
+#include <iostream>
+#include <regex>
+#include "command.h"
 using namespace std;
 
 class ipInfo {
@@ -21,6 +25,7 @@ public:
     vector<string> getCountryRoute();
 private:
     string ipAddr;
+
 
 };
 
