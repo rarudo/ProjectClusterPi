@@ -17,16 +17,15 @@ public:
 
     ipInfo(string ss);
 
-    string getDns();
     vector<string> getRoute();
     string getCountry();
-    string getNameServer();
     string getIpAddress();
     vector<string> getCountryRoute();
 private:
+    //コマンドを実行したことを記録
+    bool didGetDns;
+    string dns;
     string ipAddr;
-
-
 };
 
 

@@ -35,3 +35,26 @@ string command::getResult(){
     std::string str(it, last);
     return str;
 }
+
+/**
+ *実行したいコマンドを第一引数
+ * 取り出したい結果を第二引数(正規表現で)
+ *
+ * 正規表現で記述した文字列
+ * @return
+ */
+string command::analyzeCommand(string commandStr,string reg) {
+    smatch match;
+    this->doCommand(commandStr);
+    regex re(reg);
+    string cmdResult = this->getResult();
+    int result = regex_search(cmdResult, match,re);
+    cout << match.str() << endl;
+    if(result){
+        cout << match[match.size() - 1] << endl;
+        //配列の最後の要素（正規表現の結果）を返す
+        return match[match.size() - 1];
+    }else{
+        return "";
+    }
+}

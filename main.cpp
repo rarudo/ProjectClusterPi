@@ -1,33 +1,36 @@
 #include <iostream>
+#include <string>
 #include "ipInfo.h"
+#include "dnsInfo.h"
 
 int main() {
+    dnsInfo *dns;
     ipInfo *ip;
-    ip = new ipInfo("216.58.197.184 ");
-//    system("ping -c 2 google.com > tmp");
-
-
+    ip = new ipInfo("216.58.197.184");
+    dns = new dnsInfo();
+    dns->setIpAddr("216.58.197.184");
     cout << "ip Address " << endl;
     cout << "     "+ip->getIpAddress() << endl;
-    cout << "DNS Name"<< endl;
-    cout << "     "+ip->getDns() << endl;
-
-/*
+    cout << "RTP"<< endl;
+    cout << "     "+dns->getRtp() << endl;
+    cout << "Name Server Name"<< endl;
+    cout << "     "+dns->getNameServerName() << endl;
+    cout << "Name Server Ip"<< endl;
+    cout << "     "+dns->getNameServerIp() << endl;
     cout << "ip Route"<< endl;
     for(auto n: ip->getRoute()){
         cout <<"     "+ n <<endl;
     }
-
-    cout << "Send Country"<< endl;
-    cout << "     "+ip->getCountry() << endl;
-
-    cout << "Send Name Server"<< endl;
-    cout << "     "+ip->getNameServer() << endl;
-
     cout << "Relay Countrys" << endl;
     for(auto n: ip->getCountryRoute()){
         cout <<"     "+ n <<endl;
     }
+/*
+    cout << "Send Country"<< endl;
+    cout << "     "+ip->getCountry() << endl;
+
+
 */
+//    delete ip;
     return 0;
 }
