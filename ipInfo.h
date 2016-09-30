@@ -17,7 +17,7 @@ public:
 
     ipInfo(string ss);
 
-    vector<string> getRoute();
+    vector<string> getIpRoute();
     string getCountry();
     string getIpAddress();
     vector<string> getCountryRoute();

@@ -33,7 +33,6 @@ void dnsInfo::fetchDnsInfo() {
     rtp = cmd.analyzeCommand("dig -x "+_ip ,"ANSWER[\\s\\S]*PTR\\s*(.*)");
     nameServerName = cmd.analyzeCommand("dig -x "+_ip+" NS" ,"SOA\\s*(.*?)\\s");
     nameServerIp = cmd.analyzeCommand("dig "+nameServerName,"ANSWER SECTION[\\s\\S]*(?:IN)\\s*A\\s(.*)");
-    cout << cmd.getResult() << endl;
     this->dnsName = rtp;
     this->nameServerName = nameServerName;
     this->nameServerIp = nameServerIp;

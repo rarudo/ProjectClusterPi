@@ -48,7 +48,6 @@ string command::analyzeCommand(string commandStr,string reg) {
     this->doCommand(commandStr);
     regex re(reg);
     string cmdResult = this->getResult();
-    cout << cmdResult << endl;
     int result = regex_search(cmdResult, match,re);
     if(result){
         //配列の最後の要素（正規表現の結果）を返す
@@ -74,16 +73,12 @@ vector<string> command::analyzeCommandMulti(string commandStr,string reg) {
     this->doCommand(commandStr);
     regex re(reg);
     string cmdResult = this->getResult();
-    cout << cmdResult << endl;
 
-    for ( auto it = cmdResult.begin();
-          int result = regex_search(cmdResult, match,re);
-          it += match.position(0) + match.length(0) )
-    {
-        if(result) {
-            resultMulti.push_back(match.str(0));
-        }
+    while (regex_search(cmdResult, match,re)) {
+        resultMulti.push_back(match[match.size()-1]);
+        cmdResult = match.suffix();
     }
+
     return resultMulti;
 }
 

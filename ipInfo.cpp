@@ -11,13 +11,11 @@ string ipInfo::getIpAddress(){
 }
 
 vector<string> ipInfo::getCountryRoute(){
+    string _ip = this->ipAddr;
     /**
      * getRouteとgetCountryを組み合わせて
      * どの国（地域）を辿ってきたかを返す
      */
-    command cmd;
-    string result = cmd.analyzeCommand("sudo traceroute -I "+_ip,"(.*)");
-    cout << result endl;
     vector<string> route;
     route.push_back("Chiba");
     route.push_back("Tokyo");
@@ -34,15 +32,16 @@ string ipInfo::getCountry(){
     return "US";
 }
 
-vector<string> ipInfo::getRoute(){
+vector<string> ipInfo::getIpRoute(){
     string _ip = this->ipAddr;
-    /**
-     * 処理
-     * Linux上ならtracerouteでIPパケットの到達経路を取得
-     *格納例
-     * vectorの最初が自分に一番近いルーターのアドレス
-     * 最後の配列が相手のipアドレス
-     */
-    vector<string> route;
-    return route;
+    vector<string> result;
+    command cmd;
+    vector<string> resultTmp = cmd.analyzeCommandMulti("sudo traceroute -I -w 0.2 -q 1 -n "+_ip,"(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})\\s");
+    //tracerouteの結果か宛先ipを除外する
+    for(auto n:resultTmp){
+        if(n != _ip){
+            result.push_back(n);
+        }
+    }
+    return result;
 }

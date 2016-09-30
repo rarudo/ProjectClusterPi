@@ -2,6 +2,7 @@
 #include <string>
 #include "ipInfo.h"
 #include "dnsInfo.h"
+#include  "portInfo.h"
 
 int main() {
     dnsInfo *dns;
@@ -18,7 +19,7 @@ int main() {
     cout << "Name Server Ip"<< endl;
     cout << "     "+dns->getNameServerIp() << endl;
     cout << "ip Route"<< endl;
-    for(auto n: ip->getRoute()){
+    for(auto n: ip->getIpRoute()){
         cout <<"     "+ n <<endl;
     }
     cout << "Relay Countrys" << endl;

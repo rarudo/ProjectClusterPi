@@ -15,6 +15,8 @@ public:
     void doCommand(string str);
     string getResult();
     string analyzeCommand(string commandStr,string re);
+    vector<string> analyzeCommandMulti(string commandStr,string re);
+
 private:
 };
 
