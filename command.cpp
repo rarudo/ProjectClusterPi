@@ -40,7 +40,7 @@ string command::getResult(){
  *実行したいコマンドを第一引数
  * 取り出したい結果を第二引数(正規表現で)
  *
- * 正規表現で記述した文字列
+ * 正規表現で記述した文字列をかえす(1つだけ)
  * @return
  */
 string command::analyzeCommand(string commandStr,string reg) {
@@ -48,13 +48,42 @@ string command::analyzeCommand(string commandStr,string reg) {
     this->doCommand(commandStr);
     regex re(reg);
     string cmdResult = this->getResult();
+    cout << cmdResult << endl;
     int result = regex_search(cmdResult, match,re);
-    cout << match.str() << endl;
     if(result){
-        cout << match[match.size() - 1] << endl;
         //配列の最後の要素（正規表現の結果）を返す
         return match[match.size() - 1];
     }else{
         return "";
     }
 }
+
+
+/**
+ *実行したいコマンドを第一引数
+ * 取り出したい結果を第二引数(正規表現で)
+ *
+ * 正規表現で記述した文字列を複数かえす
+ * @return
+ */
+vector<string> command::analyzeCommandMulti(string commandStr,string reg) {
+    //正規表現で一致したものを格納
+    smatch match;
+    //正規表現で一致したものすべてを格納
+    vector<string> resultMulti;
+    this->doCommand(commandStr);
+    regex re(reg);
+    string cmdResult = this->getResult();
+    cout << cmdResult << endl;
+
+    for ( auto it = cmdResult.begin();
+          int result = regex_search(cmdResult, match,re);
+          it += match.position(0) + match.length(0) )
+    {
+        if(result) {
+            resultMulti.push_back(match.str(0));
+        }
+    }
+    return resultMulti;
+}
+
