@@ -10,23 +10,26 @@
 #include <iostream>
 #include <regex>
 #include "command.h"
+#include <error.h>
+#include <stdlib.h>
+#include "locationInfo.h"
+
 using namespace std;
 
 class ipInfo {
 public:
 
     ipInfo(string ss);
-
     vector<string> getIpRoute();
-    string getCountry();
     string getIpAddress();
     vector<string> getCountryRoute();
+    vector<string> getCityRoute();
 private:
-    //コマンドを実行したことを記録
-    bool didGetDns;
-    string dns;
     string ipAddr;
+    vector<string> ipRoute;
+    vector<string> countryRoute;
+    vector<string> cityRoute;
+    void fetchIpRoute();
+    void fetchRoute();
 };
-
-
 #endif //PROJECTPI_IPINFO_H

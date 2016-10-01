@@ -7,9 +7,10 @@
 int main() {
     dnsInfo *dns;
     ipInfo *ip;
-    ip = new ipInfo("216.58.197.184");
+    string ipAddr = "172.217.25.67";
+    ip = new ipInfo(ipAddr);
     dns = new dnsInfo();
-    dns->setIpAddr("216.58.197.184");
+    dns->setIpAddr(ipAddr);
     cout << "ip Address " << endl;
     cout << "     "+ip->getIpAddress() << endl;
     cout << "RTP"<< endl;
@@ -26,12 +27,18 @@ int main() {
     for(auto n: ip->getCountryRoute()){
         cout <<"     "+ n <<endl;
     }
+
+    cout << "Relay Cities" << endl;
+    for(auto n: ip->getCityRoute()){
+        cout <<"     "+ n <<endl;
+    }
 /*
     cout << "Send Country"<< endl;
     cout << "     "+ip->getCountry() << endl;
 
 
 */
-//    delete ip;
+    delete ip;
+    delete dns;
     return 0;
 }
