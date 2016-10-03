@@ -5,7 +5,7 @@
 #ifndef PROJECTPI_DNSINFO_H
 #define PROJECTPI_DNSINFO_H
 #include <string>
-#include "command.h"
+#include "../command.h"
 #include <regex>
 using namespace std;
 

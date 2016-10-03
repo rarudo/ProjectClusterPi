@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <regex>
-#include "command.h"
+#include "../command.h"
 #include <error.h>
 #include <stdlib.h>
 #include "locationInfo.h"

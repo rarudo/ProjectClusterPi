@@ -90,7 +90,7 @@ void locationInfo::fetchLocation(){
 
         if (NULL != entry_data_list) {
             //情報一覧を表示(デバッグ用)
-            MMDB_dump_entry_data_list(stdout, entry_data_list, 2);
+            //MMDB_dump_entry_data_list(stdout, entry_data_list, 2);
             MMDB_entry_data_s entry_data_city, entry_data_country;
             //得たい情報を指定する
             MMDB_get_value(&result.entry, &entry_data_country, "country", "iso_code", NULL);

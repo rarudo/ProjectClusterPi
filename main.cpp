@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "ipInfo.h"
-#include "dnsInfo.h"
+#include "ipAnalyse/ipInfo.h"
+#include "ipAnalyse/dnsInfo.h"
 #include  "portInfo.h"
 
 int main() {
