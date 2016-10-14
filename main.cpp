@@ -2,12 +2,13 @@
 #include <string>
 #include "ipAnalyse/ipInfo.h"
 #include "ipAnalyse/dnsInfo.h"
-#include  "portInfo.h"
+#include "Port.h"
+#include "mySql/MySQLConnWrapper.h"
 
 int main() {
     dnsInfo *dns;
     ipInfo *ip;
-    string ipAddr = "172.217.25.67";
+    string ipAddr = "216.58.197.238";
     ip = new ipInfo(ipAddr);
     dns = new dnsInfo();
     dns->setIpAddr(ipAddr);
@@ -32,6 +33,11 @@ int main() {
     for(auto n: ip->getCityRoute()){
         cout <<"     "+ n <<endl;
     }
+
+//    MySQLConnWrapper *mscw = new MySQLConnWrapper();
+//    mscw->connect();
+//    mscw->switchDb("clusterpi");
+//    mscw->execute("");
 /*
     cout << "Send Country"<< endl;
     cout << "     "+ip->getCountry() << endl;

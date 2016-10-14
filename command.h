@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class command {
+class Command {
 public:
     void doCommand(string str);
     string getResult();

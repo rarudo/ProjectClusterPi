@@ -29,7 +29,7 @@ void dnsInfo::init(){
 void dnsInfo::fetchDnsInfo() {
     string _ip = this->ipAddr;
     string rtp,nameServerName,nameServerIp;
-    command cmd = command();
+    Command cmd = Command();
     rtp = cmd.analyzeCommand("dig -x "+_ip ,"ANSWER SECTION[\\s\\S]*PTR\\s*(.*)");
     nameServerName = cmd.analyzeCommand("dig -x "+_ip+" NS" ,"SOA\\s*(.*?)\\s");
     nameServerIp = cmd.analyzeCommand("dig "+nameServerName,"ANSWER SECTION[\\s\\S]*(?:IN)\\s*A\\s(.*)");
