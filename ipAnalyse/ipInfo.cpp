@@ -59,7 +59,7 @@ void ipInfo::fetchRoute() {
 void ipInfo::fetchIpRoute(){
     string _ip = this->ipAddr;
     vector<string> result;
-    command cmd;
+    Command cmd;
     vector<string> resultTmp = cmd.analyzeCommandMulti("sudo traceroute -I -w 0.2 -q 1 -n "+_ip,"(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}).*ms");
     this->ipRoute = resultTmp;
 }

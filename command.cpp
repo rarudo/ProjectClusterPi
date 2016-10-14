@@ -3,13 +3,13 @@
 //
 
 #include <fstream>
-#include "command.h"
+#include "Command.h"
 
 /**
  * コマンドの実行結果をtmpファイルに書き込む
  * @param str
  */
-void command::doCommand(string str){
+void Command::doCommand(string str){
     // コマンドの出力をｔｍｐファイルに書き込む
     //LANG=Cをつけて英語で返すように
     string command = "LANG=C " + str + " >tmp";
@@ -24,7 +24,7 @@ void command::doCommand(string str){
 /*
  * tmpファイルの内容を返す
  */
-string command::getResult(){
+string Command::getResult(){
     ifstream ifs("tmp");
     if (ifs.fail())
     {
@@ -43,7 +43,7 @@ string command::getResult(){
  * 正規表現で記述した文字列をかえす(1つだけ)
  * @return
  */
-string command::analyzeCommand(string commandStr,string reg) {
+string Command::analyzeCommand(string commandStr,string reg) {
     smatch match;
     this->doCommand(commandStr);
     regex re(reg);
@@ -65,7 +65,7 @@ string command::analyzeCommand(string commandStr,string reg) {
  * 正規表現で記述した文字列を複数かえす
  * @return
  */
-vector<string> command::analyzeCommandMulti(string commandStr,string reg) {
+vector<string> Command::analyzeCommandMulti(string commandStr,string reg) {
     //正規表現で一致したものを格納
     smatch match;
     //正規表現で一致したものすべてを格納
@@ -81,4 +81,3 @@ vector<string> command::analyzeCommandMulti(string commandStr,string reg) {
 
     return resultMulti;
 }
-
