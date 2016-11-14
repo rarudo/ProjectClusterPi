@@ -1,14 +1,13 @@
 #include <iostream>
-#include <string>
 #include "ipAnalyse/ipInfo.h"
 #include "ipAnalyse/dnsInfo.h"
-#include "Port.h"
-#include "mySql/MySQLConnWrapper.h"
+#include "mySql/Ipaddreses.h"
+#include "mySql/TaskQue.h"
 
-int main() {
+void doMain(string ipAddr){
+    //string ipAddr = "63.240.178.216";
     dnsInfo *dns;
     ipInfo *ip;
-    string ipAddr = "216.58.197.238";
     ip = new ipInfo(ipAddr);
     dns = new dnsInfo();
     dns->setIpAddr(ipAddr);
@@ -34,17 +33,37 @@ int main() {
         cout <<"     "+ n <<endl;
     }
 
-//    MySQLConnWrapper *mscw = new MySQLConnWrapper();
-//    mscw->connect();
-//    mscw->switchDb("clusterpi");
-//    mscw->execute("");
-/*
-    cout << "Send Country"<< endl;
-    cout << "     "+ip->getCountry() << endl;
+    cout << "Relay Latitude" << endl;
+    for(auto n: ip->getLatitudeRoute()){
+        cout <<"     "+ n <<endl;
+    }
+
+    cout << "Relay Longitude" << endl;
+    for(auto n: ip->getLongitudeRoute()){
+        cout <<"     "+ n <<endl;
+    }
 
 
-*/
-    delete ip;
-    delete dns;
-    return 0;
+    Ipaddreses *ipSql;
+    ipSql = new Ipaddreses(ip->getIpAddress()
+            ,"10.10.10.10"
+            ,dns->getRtp()
+            ,dns->getNameServerIp()
+            ,80
+            ,ip->getLatitudeRoute()
+            ,ip->getLongitudeRoute()
+    );
+
+
 }
+
+int main() {
+    TaskQue *tq;
+    tq = new TaskQue();
+   while(tq->fetch()){
+       string ipAddr = tq->getIpAddr();
+       doMain(ipAddr);
+    }
+   return 0;
+}
+

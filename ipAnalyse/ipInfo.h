@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <regex>
-#include "../Command.h"
+#include "../command.h"
 #include <error.h>
 #include <stdlib.h>
 #include "locationInfo.h"
@@ -24,11 +24,15 @@ public:
     string getIpAddress();
     vector<string> getCountryRoute();
     vector<string> getCityRoute();
+    vector<string> getLatitudeRoute();
+    vector<string> getLongitudeRoute();
 private:
     string ipAddr;
     vector<string> ipRoute;
     vector<string> countryRoute;
     vector<string> cityRoute;
+    vector<string> latitudeRoute;
+    vector<string> longitudeRoute;
     void fetchIpRoute();
     void fetchRoute();
 };

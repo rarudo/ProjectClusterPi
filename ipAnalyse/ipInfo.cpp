@@ -25,32 +25,42 @@ vector<string> ipInfo::getIpRoute() {
     return this->ipRoute;
 }
 
+vector<string> ipInfo::getLatitudeRoute() {
+    return this->latitudeRoute;
+}
+
+vector<string> ipInfo::getLongitudeRoute() {
+    return this->longitudeRoute;
+}
+
+
 /**
  * ipの経路から国と地域の経路を取得
  */
 void ipInfo::fetchRoute() {
-    vector<string> resultCountry, resultCity;
+    vector<string> resultCountry, resultCity, resultLatitude, resultLongitude;
     locationInfo li;
     //ipRouteで取得したipアドレスすべてを調べる
     for(auto ipAddr :this->getIpRoute()){
         li.setIpAddr(ipAddr);
         //国の情報を取得
-        string preResultCountry = (li.getCountry());
-        string preResultCity = (li.getCity());
-
-        if(preResultCountry.size() > 0){
-            resultCountry.push_back(preResultCountry);
-        }else{
-            //resultCountry.push_back("Unknown");
-        }
-        if(preResultCity.size() > 0){
-            resultCity.push_back(preResultCity);
-        }else{
-            //resultCity.push_back("Unknown");
-        }
+        if(li.getCountry().size() > 0)
+            resultCountry.push_back(li.getCountry());
+        //地域の情報を取得
+        if(li.getCity().size() > 0)
+            resultCountry.push_back(li.getCity());
+        //緯度の情報を取得
+        if(li.getLatitude().size() > 0)
+            resultLatitude.push_back(li.getLatitude());
+        //経度の情報を取得
+        if(li.getLongitude().size() > 0)
+            resultLongitude.push_back(li.getLongitude());
     }
     this->countryRoute = resultCountry;
     this->cityRoute = resultCity;
+    this->latitudeRoute = resultLatitude;
+    this->longitudeRoute= resultLongitude;
+
 }
 
 /**
@@ -58,11 +68,11 @@ void ipInfo::fetchRoute() {
  */
 void ipInfo::fetchIpRoute(){
     string _ip = this->ipAddr;
-    vector<string> result;
-    Command cmd;
+    command cmd;
     vector<string> resultTmp = cmd.analyzeCommandMulti("sudo traceroute -I -w 0.2 -q 1 -n "+_ip,"(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}).*ms");
     this->ipRoute = resultTmp;
 }
+
 
 
 
