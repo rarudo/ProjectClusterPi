@@ -18,6 +18,14 @@
 #include "MySQLConnWrapper.h"
 
 using namespace std;
+MySQLConnWrapper::MySQLConnWrapper()
+{
+    //host     = "tcp://tk2-218-18711.vs.sakura.ne.jp:3306";
+    host     = "hogehoge.net:1000";
+    user     = "hogehoge";
+    password = "hogehoge";
+
+}
 
 MySQLConnWrapper::~MySQLConnWrapper()
 {

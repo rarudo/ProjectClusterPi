@@ -5,7 +5,7 @@
 #include "locationInfo.h"
 
 
-
+//処理のトリガー
 void locationInfo::setIpAddr(string _ip){
     init();
     this->ip = _ip;
@@ -53,7 +53,7 @@ void locationInfo::fetchLocation(){
     string longitudeResult;
     //データベース不ファイルを指定
     const char *filename =  "/media/workspace/projectPi/ipDatabases/GeoLite2-City.mmdb";
-    const char *filename2 =  "/home/user/workspace/projectPi/ipDatabases/GeoLite2-City.mmdb";
+    const char *filename2 =  "../ipDatabases/GeoLite2-City.mmdb";
     const char *ip_address = _ip.c_str();
     MMDB_s mmdb;
     int status = MMDB_open(filename, MMDB_MODE_MMAP, &mmdb);
@@ -122,9 +122,9 @@ void locationInfo::fetchLocation(){
             longitudeResult = getMMDBresult(entry_data_location_longitude);
         }
     } else {
-        fprintf(stderr,
-                "\n  No entry for this IP address (%s) was found\n\n",
-                ip_address);
+        //fprintf(stderr,
+        //        "\n  No entry for this IP address (%s) was found\n\n",
+        //        ip_address);
         exit_code = 5;
     }
 

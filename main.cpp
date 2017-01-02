@@ -4,7 +4,7 @@
 #include "mySql/Ipaddreses.h"
 #include "mySql/TaskQue.h"
 
-void doMain(string ipAddr){
+void doAnalyze(string ipAddr){
     //string ipAddr = "63.240.178.216";
     dnsInfo *dns;
     ipInfo *ip;
@@ -19,29 +19,29 @@ void doMain(string ipAddr){
     cout << "     "+dns->getNameServerName() << endl;
     cout << "Name Server Ip"<< endl;
     cout << "     "+dns->getNameServerIp() << endl;
-    cout << "ip Route"<< endl;
-    for(auto n: ip->getIpRoute()){
-        cout <<"     "+ n <<endl;
-    }
-    cout << "Relay Countrys" << endl;
-    for(auto n: ip->getCountryRoute()){
-        cout <<"     "+ n <<endl;
-    }
+    //cout << "ip Route"<< endl;
+    //for(auto n: ip->getIpRoute()){
+    //    cout <<"     "+ n <<endl;
+    //}
+   // cout << "Relay Countrys" << endl;
+   // for(auto n: ip->getCountryRoute()){
+   //     cout <<"     "+ n <<endl;
+   // }
 
-    cout << "Relay Cities" << endl;
-    for(auto n: ip->getCityRoute()){
-        cout <<"     "+ n <<endl;
-    }
+   // cout << "Relay Cities" << endl;
+   // for(auto n: ip->getCityRoute()){
+   //     cout <<"     "+ n <<endl;
+   // }
 
-    cout << "Relay Latitude" << endl;
-    for(auto n: ip->getLatitudeRoute()){
-        cout <<"     "+ n <<endl;
-    }
+   // cout << "Relay Latitude" << endl;
+   // for(auto n: ip->getLatitudeRoute()){
+   //     cout <<"     "+ n <<endl;
+   // }
 
-    cout << "Relay Longitude" << endl;
-    for(auto n: ip->getLongitudeRoute()){
-        cout <<"     "+ n <<endl;
-    }
+   // cout << "Relay Longitude" << endl;
+   // for(auto n: ip->getLongitudeRoute()){
+   //     cout <<"     "+ n <<endl;
+   // }
 
 
     Ipaddreses *ipSql;
@@ -53,8 +53,9 @@ void doMain(string ipAddr){
             ,ip->getLatitudeRoute()
             ,ip->getLongitudeRoute()
     );
-
-
+    delete ip;
+    delete dns;
+    delete ipSql;
 }
 
 int main() {
@@ -62,7 +63,7 @@ int main() {
     tq = new TaskQue();
    while(tq->fetch()){
        string ipAddr = tq->getIpAddr();
-       doMain(ipAddr);
+       doAnalyze(ipAddr);
     }
    return 0;
 }
