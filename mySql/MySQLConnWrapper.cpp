@@ -7,24 +7,51 @@
  */
 
 
-#include "mysql_connection.h"
-
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
-
 #include "MySQLConnWrapper.h"
 
 using namespace std;
 MySQLConnWrapper::MySQLConnWrapper()
 {
-    //host     = "tcp://tk2-218-18711.vs.sakura.ne.jp:3306";
-    host     = "hogehoge.net:1000";
-    user     = "hogehoge";
-    password = "hogehoge";
+    loadSqlSettings();
 
+
+}
+void MySQLConnWrapper::loadSqlSettings() {
+    string fname = ".secret";
+    ifstream *ifs = new ifstream(fname);
+    string str;
+    string hostname;
+    string port;
+
+    //読み込み失敗時
+    if (ifs->fail()) {
+        cerr << "設定ファイルの読み込み失敗" << endl;
+        //設定ファイル書き込み
+        std::ofstream ofs;
+        ofs.open(fname, std::ios::app);
+        ofs << "hostname:localhost" << endl;
+        ofs << "port:10000" << endl;
+        ofs << "user:your user" << endl;
+        ofs << "password:your password" << endl;
+        ifs = new ifstream(fname);
+    }
+    //ファイル読み込み
+    while (getline(*ifs, str)) {
+        string value = str.substr(str.find(':') + 1);
+        string key = str.substr(0, str.find(':'));
+        //switch文に文字列は使えない?
+        if (key == "hostname")
+            hostname = value;
+        else if (key == "port")
+            port = value;
+        else if (key == "user")
+            user = value;
+        else if (key == "password")
+            password = value;
+    }
+    //ホストネーム:portの形で格納
+    host = hostname +":"+port;
+    delete ifs;
 }
 
 MySQLConnWrapper::~MySQLConnWrapper()
@@ -114,3 +141,4 @@ string MySQLConnWrapper::print(const int& index)
 {
     return res->getString(index);
 }
+
